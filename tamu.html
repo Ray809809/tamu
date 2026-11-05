@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Portal Pengaduan &amp; Laporan Tamu - PU Pekerjaan Umum</title>
+  <link rel="stylesheet" href="style.css?v=5.0">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%230F294A%22 rx=%2210%22/><text y=%2268%22 x=%2250%22 text-anchor=%22middle%22 font-size=%2250%22 font-weight=%22bold%22 fill=%22%23FABE2C%22>PU</text></svg>">
+  <style>
+    .tamu-hero {
+      background: linear-gradient(135deg, #153E75 0%, #1D4ED8 100%);
+      color: #fff;
+      padding: 1.75rem 1.25rem;
+      border-radius: var(--radius-md);
+      margin-bottom: 1.25rem;
+      border-left: 6px solid #FABE2C;
+      box-shadow: 0 4px 16px rgba(21, 62, 117, 0.16);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app-wrapper">
+    <!-- Header Resmi Khusus Laporan Tamu -->
+    <header class="pupr-topbar" style="display:flex; justify-content:space-between; align-items:center;">
+      <div style="display:flex; align-items:center; gap:0.75rem;">
+        <img src="logo-pu.webp" alt="Logo PU" class="pupr-logo-img">
+        <div class="pupr-brand-text">
+          <span class="pupr-brand-title">PU PEKERJAAN UMUM</span>
+          <span class="pupr-brand-sub">Portal Pengaduan &amp; Laporan Tamu</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-wrapper" style="max-width: 880px; margin: 1.25rem auto; width: 100%; padding: 0.75rem;">
+      <div class="tamu-hero">
+        <span class="badge-role" style="background:#FABE2C; color:#0F294A; font-weight:800; font-size:0.75rem;">PORTAL
+          LAPORAN RESMI</span>
+        <h1 style="font-size:1.5rem; font-weight:800; margin:0.4rem 0 0.3rem;">Portal Pengaduan &amp; Surat Balasan Tamu
+        </h1>
+        <p style="font-size:0.85rem; color:#CBD5E1; margin:0; line-height:1.5;">
+          Sampaikan laporan infrastruktur ke PU Pekerjaan Umum, pantau posisi surat disposisi dinas, dan unduh
+          Surat Balasan Resmi Sakres berbarcode PDF.
+        </p>
+
+        <!-- Tombol Bantuan Hubungi Petugas via WhatsApp Resmi -->
+        <div style="margin-top:0.85rem; display:flex; gap:0.5rem; flex-wrap:wrap; align-items:center;">
+          <a href="https://wa.me/628111930158?text=Halo%20Admin%20PU,%20saya%20ingin%20berkonsultasi%20mengenai%20laporan%20pengaduan%20infrastruktur." 
+            target="_blank" 
+            style="background:#25D366; color:#fff; text-decoration:none; padding:0.45rem 1rem; border-radius:6px; font-size:0.82rem; font-weight:700; display:inline-flex; align-items:center; gap:0.4rem; box-shadow:0 2px 6px rgba(37,211,102,0.3);">
+            <span>💬</span> Hubungi Petugas via WhatsApp (0811-193-0158)
+          </a>
+          <span style="font-size:0.75rem; color:#E2E8F0;">Layanan Terhubung WhatsApp PUSDATIN PU</span>
+        </div>
+      </div>
+
+      <!-- Tab Navigasi Khusus Tamu: Buat Laporan vs Cek Surat Balasan Sakres -->
+      <div class="public-tabs-nav" style="display:flex; gap:0.5rem; margin-bottom:1.25rem;">
+        <button type="button" class="public-tab-btn active" id="tabBtnKirimLaporan"
+          onclick="switchPortalTamuTab('form')">
+          ✍️ Kirim Laporan / Pengaduan
+        </button>
+        <button type="button" class="public-tab-btn" id="tabBtnCekSurat" onclick="switchPortalTamuTab('cek')"
+          style="background:#EDE9FE; color:#5B21B6; font-weight:700;">
+          📬 Cek Surat Balasan Sakres (QR PDF)
+        </button>
+      </div>
+
+      <!-- KONTEN 1: FORMULIR LAPORAN TAMU -->
+      <div id="contentTamuForm" class="public-form-card">
+        <div class="public-form-intro">
+          <h3>Formulir Laporan &amp; Pengaduan Publik</h3>
+          <p>Laporan yang Anda kirim akan langsung masuk ke <strong>Kotak Masuk Laporan Admin PU</strong> untuk
+            diverifikasi dan ditindaklanjuti.</p>
+        </div>
+
+        <form id="formBukuTamu">
+
+          <!-- KELOMPOK 1: DATA IDENTITAS PEMOHON SESUAI FORM PUPR RESMI -->
+          <div
+            style="background:#ffffff; border:1px solid #E2E8F0; border-radius:12px; padding:1.25rem; margin-bottom:1.25rem; box-shadow:0 2px 6px rgba(0,0,0,0.03);">
+            <div
+              style="font-size:0.88rem; font-weight:800; color:#0F294A; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:1rem; display:flex; align-items:center; gap:0.4rem; border-bottom:2px solid #E2E8F0; padding-bottom:0.5rem;">
+              <span>👤</span> 1. Identitas Pemohon / Pelapor
+            </div>
+
+            <!-- Nama -->
+            <div class="form-field" style="margin-bottom:1rem;">
+              <label class="field-label" for="tamuNama" style="font-weight:700;">Nama <span
+                  style="color:#DC2626;">*</span></label>
+              <input type="text" id="tamuNama" class="form-control" placeholder="Jawaban Anda" required
+                style="font-size:0.95rem; padding:0.65rem 0.85rem;">
+            </div>
+
+            <!-- Handphone & Email -->
+            <div class="form-row-2">
+              <div class="form-field">
+                <label class="field-label" for="tamuHp" style="font-weight:700;">Handphone <span
+                    style="color:#DC2626;">*</span></label>
+                <input type="tel" id="tamuHp" class="form-control" placeholder="Jawaban Anda (Contoh: 08123456789)"
+                  required style="font-size:0.95rem; padding:0.65rem 0.85rem;">
+              </div>
+              <div class="form-field">
+                <label class="field-label" for="tamuEmail" style="font-weight:700;">Email <span
+                    style="color:#DC2626;">*</span></label>
+                <input type="email" id="tamuEmail" class="form-control" placeholder="Jawaban Anda (email@domain.com)"
+                  required style="font-size:0.95rem; padding:0.65rem 0.85rem;">
+              </div>
+            </div>
+
+            <!-- JENIS KELAMIN (Radio Cards persis di screenshot) -->
+            <div class="form-field" style="margin-top:0.75rem; margin-bottom:1rem;">
+              <label class="field-label" style="font-weight:700;">JENIS KELAMIN <span
+                  style="color:#DC2626;">*</span></label>
+              <div
+                style="display:flex; flex-direction:column; gap:0.55rem; margin-top:0.4rem; background:#F8FAFC; padding:0.85rem 1rem; border-radius:8px; border:1px solid #E2E8F0;">
+                <label
+                  style="display:inline-flex; align-items:center; gap:0.6rem; font-size:0.95rem; cursor:pointer; color:#334155;">
+                  <input type="radio" name="tamuGender" value="Laki-Laki"
+                    style="width:18px; height:18px; accent-color:#0F294A;">
+                  <span>Laki-Laki</span>
+                </label>
+                <label
+                  style="display:inline-flex; align-items:center; gap:0.6rem; font-size:0.95rem; cursor:pointer; color:#334155;">
+                  <input type="radio" name="tamuGender" value="Perempuan"
+                    style="width:18px; height:18px; accent-color:#0F294A;">
+                  <span>Perempuan</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Asal Instansi -->
+            <div class="form-field" style="margin-bottom:1rem;">
+              <label class="field-label" for="tamuInstansi" style="font-weight:700;">Asal Instansi <span
+                  style="color:#DC2626;">*</span></label>
+              <input type="text" id="tamuInstansi" class="form-control"
+                placeholder="Jawaban Anda (Contoh: Warga Kab. Cirebon / PT. Mitra Mandiri)" required
+                style="font-size:0.95rem; padding:0.65rem 0.85rem;">
+            </div>
+
+            <!-- KATEGORI PEMOHON (Radio pilihan lengkap persis di screenshot) -->
+            <div class="form-field" style="margin-top:0.75rem;">
+              <label class="field-label" style="font-weight:700;">KATEGORI PEMOHON <span
+                  style="color:#DC2626;">*</span></label>
+              <div
+                style="display:flex; flex-direction:column; gap:0.65rem; margin-top:0.4rem; background:#F8FAFC; padding:0.85rem 1rem; border-radius:8px; border:1px solid #E2E8F0;">
+                <label
+                  style="display:flex; align-items:flex-start; gap:0.6rem; font-size:0.92rem; cursor:pointer; color:#334155;">
+                  <input type="radio" name="tamuKategoriPemohon"
+                    value="Pemerintah Pusat/ Daerah/ Desa dan Legislatif, Yudikatif"
+                    style="margin-top:3px; width:18px; height:18px; accent-color:#0F294A;">
+                  <span>Pemerintah Pusat/ Daerah/ Desa dan Legislatif, Yudikatif</span>
+                </label>
+                <label
+                  style="display:flex; align-items:flex-start; gap:0.6rem; font-size:0.92rem; cursor:pointer; color:#334155;">
+                  <input type="radio" name="tamuKategoriPemohon" value="BUMN, BUMD, BUMDes, Swasta"
+                    style="margin-top:3px; width:18px; height:18px; accent-color:#0F294A;">
+                  <span>BUMN, BUMD, BUMDes, Swasta</span>
+                </label>
+                <label
+                  style="display:flex; align-items:flex-start; gap:0.6rem; font-size:0.92rem; cursor:pointer; color:#334155;">
+                  <input type="radio" name="tamuKategoriPemohon"
+                    value="Perguruan Tinggi, Mahasiswa dan Masyarakat/ Umum"
+                    style="margin-top:3px; width:18px; height:18px; accent-color:#0F294A;">
+                  <span>Perguruan Tinggi, Mahasiswa dan Masyarakat/ Umum</span>
+                </label>
+                <label
+                  style="display:flex; align-items:flex-start; gap:0.6rem; font-size:0.92rem; cursor:pointer; color:#334155;">
+                  <input type="radio" name="tamuKategoriPemohon" value="Lembaga Kemasyarakatan dan Media"
+                    style="margin-top:3px; width:18px; height:18px; accent-color:#0F294A;">
+                  <span>Lembaga Kemasyarakatan dan Media</span>
+                </label>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- KELOMPOK 2: PERIHAL, JENIS LAYANAN & URAIAN LAPORAN -->
+          <div
+            style="background:#ffffff; border:1px solid #E2E8F0; border-radius:12px; padding:1.25rem; margin-bottom:1.25rem; box-shadow:0 2px 6px rgba(0,0,0,0.03);">
+            <div
+              style="font-size:0.88rem; font-weight:800; color:#0F294A; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:1rem; display:flex; align-items:center; gap:0.4rem; border-bottom:2px solid #E2E8F0; padding-bottom:0.5rem;">
+              <span>📋</span> 2. Rincian Laporan / Pengaduan
+            </div>
+
+            <!-- PERIHAL (Sesuai screenshot) -->
+            <div class="form-field" style="margin-bottom:1rem;">
+              <label class="field-label" for="tamuKeperluan" style="font-weight:700;">PERIHAL <span
+                  style="color:#DC2626;">*</span></label>
+              <input type="text" id="tamuKeperluan" class="form-control" placeholder="Jawaban Anda" required
+                style="font-size:0.95rem; padding:0.65rem 0.85rem;">
+            </div>
+
+            <!-- Lokasi Kejadian -->
+            <div class="form-field" style="margin-bottom:1rem;">
+              <label class="field-label" for="tamuLokasi" style="font-weight:700;">Lokasi Kejadian / Obyek Infrastruktur
+                <span style="color:#DC2626;">*</span></label>
+              <input type="text" id="tamuLokasi" class="form-control"
+                placeholder="Jawaban Anda (Contoh: Ruas Jalan Nasional Pantura KM 48)" required
+                style="font-size:0.95rem; padding:0.65rem 0.85rem;">
+            </div>
+
+            <!-- JENIS LAYANAN (Radio pilihan lengkap persis di screenshot) -->
+            <div class="form-field" style="margin-bottom:1rem;">
+              <label class="field-label" style="font-weight:700;">JENIS LAYANAN <span
+                  style="color:#DC2626;">*</span></label>
+              <div
+                style="display:flex; flex-direction:column; gap:0.65rem; margin-top:0.4rem; background:#F8FAFC; padding:0.85rem 1rem; border-radius:8px; border:1px solid #E2E8F0;">
+                <label
+                  style="display:flex; align-items:flex-start; gap:0.6rem; font-size:0.92rem; cursor:pointer; color:#334155;">
+                  <input type="radio" name="tamuJenisLayananRadio" value="Layanan Rekomendasi Teknis dan Perizinan"
+                    style="margin-top:3px; width:18px; height:18px; accent-color:#0F294A;">
+                  <span>Layanan Rekomendasi Teknis dan Perizinan</span>
+                </label>
+                <label
+                  style="display:flex; align-items:flex-start; gap:0.6rem; font-size:0.92rem; cursor:pointer; color:#334155;">
+                  <input type="radio" name="tamuJenisLayananRadio" value="Layanan Penanggulangan Banjir dan Bencana"
+                    style="margin-top:3px; width:18px; height:18px; accent-color:#0F294A;">
+                  <span>Layanan Penanggulangan Banjir dan Bencana</span>
+                </label>
+                <label
+                  style="display:flex; align-items:flex-start; gap:0.6rem; font-size:0.92rem; cursor:pointer; color:#334155;">
+                  <input type="radio" name="tamuJenisLayananRadio" value="Layanan Pengaduan"
+                    style="margin-top:3px; width:18px; height:18px; accent-color:#0F294A;">
+                  <span>Layanan Pengaduan</span>
+                </label>
+                <label
+                  style="display:flex; align-items:flex-start; gap:0.6rem; font-size:0.92rem; cursor:pointer; color:#334155;">
+                  <input type="radio" name="tamuJenisLayananRadio" value="Layanan Penegasan Aset BMN"
+                    style="margin-top:3px; width:18px; height:18px; accent-color:#0F294A;">
+                  <span>Layanan Penegasan Aset BMN</span>
+                </label>
+                <label
+                  style="display:flex; align-items:flex-start; gap:0.6rem; font-size:0.92rem; cursor:pointer; color:#334155;">
+                  <input type="radio" name="tamuJenisLayananRadio" value="Layanan Permohonan Data dan Informasi"
+                    style="margin-top:3px; width:18px; height:18px; accent-color:#0F294A;">
+                  <span>Layanan Permohonan Data dan Informasi</span>
+                </label>
+                <label
+                  style="display:flex; align-items:flex-start; gap:0.6rem; font-size:0.92rem; cursor:pointer; color:#334155;">
+                  <input type="radio" name="tamuJenisLayananRadio" value="Layanan Umum dan Lainnya"
+                    style="margin-top:3px; width:18px; height:18px; accent-color:#0F294A;">
+                  <span>Layanan Umum dan Lainnya</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Uraian Deskripsi Lengkap -->
+            <div class="form-field">
+              <label class="field-label" for="tamuRincian" style="font-weight:700;">Uraian / Deskripsi Lengkap Laporan
+                <span style="color:#DC2626;">*</span></label>
+              <textarea id="tamuRincian" class="form-control" rows="4"
+                placeholder="Jelaskan secara rinci kronologi, kondisi kerusakan, dampak ke warga, atau rincian permohonan Anda..."
+                required style="font-size:0.95rem;"></textarea>
+            </div>
+
+          </div>
+
+          <!-- KELOMPOK 3: OPSI SURAT LAPORAN RESMI ATAU LAPORAN LANGSUNG -->
+          <div
+            style="background:#ffffff; border:1px solid #E2E8F0; border-radius:12px; padding:1.25rem; margin-bottom:1.5rem; box-shadow:0 2px 6px rgba(0,0,0,0.03);">
+            <label class="field-label" style="font-size:0.95rem; line-height:1.5; color:#1E293B; font-weight:800;">
+              Apakah Anda Menyertakan Berkas / Surat Resmi dalam Laporan Ini? <span style="color:#DC2626;">*</span>
+            </label>
+            <p style="font-size:0.82rem; color:#64748B; margin:0.25rem 0 0.75rem 0;">
+              Pilih opsi di bawah. Jika ada surat, silakan lengkapi formulir rincian surat masuk yang otomatis terbuka.
+            </p>
+            <div
+              style="display:flex; flex-direction:column; gap:0.6rem; background:#F8FAFC; padding:0.85rem 1rem; border-radius:8px; border:1px solid #E2E8F0;">
+              <label
+                style="display:inline-flex; align-items:center; gap:0.6rem; font-size:0.95rem; cursor:pointer; color:#0F294A; font-weight:700;">
+                <input type="radio" name="tamuOpsiKirimSurat" value="AdaSurat"
+                  onchange="toggleFormSuratTambahan(this.value)" style="width:18px; height:18px; accent-color:#0F294A;">
+                <span>Ada Berkas / Surat Laporan (Lengkapi Formulir Lembar Surat Masuk)</span>
+              </label>
+              <label
+                style="display:inline-flex; align-items:center; gap:0.6rem; font-size:0.95rem; cursor:pointer; color:#334155; font-weight:600;">
+                <input type="radio" name="tamuOpsiKirimSurat" value="TanpaSurat"
+                  onchange="toggleFormSuratTambahan(this.value)" style="width:18px; height:18px; accent-color:#0F294A;">
+                <span>Tidak Menggunakan Surat (Langsung Kirim Laporan ke Admin)</span>
+              </label>
+            </div>
+
+            <!-- FORMULIR INPUT TAMBAHAN: DATA SURAT MASUK (SESUAI GAMBAR FOTO) -->
+            <div id="sectionFormInputSurat"
+              style="margin-top:1.25rem; background:#EFF6FF; border:2px solid #3B82F6; border-radius:10px; padding:1.25rem; animation:fadeIn 0.2s ease;">
+              <div
+                style="font-size:0.88rem; font-weight:800; color:#1E3A8A; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:1rem; display:flex; align-items:center; gap:0.4rem; border-bottom:1.5px solid #BFDBFE; padding-bottom:0.5rem;">
+                <span>📑</span> Formulir Data Surat Masuk (Sesuai Berkas Kedinasan)
+              </div>
+
+              <!-- Baris 1: Tanggal Diterima & Tanggal Surat -->
+              <div class="form-row-2">
+                <div class="form-field">
+                  <label class="field-label" for="inputTglDiterima" style="font-weight:700; color:#1E3A8A;">TANGGAL
+                    DITERIMA <span style="color:#DC2626;">*</span></label>
+                  <input type="date" id="inputTglDiterima" class="form-control"
+                    style="font-size:0.92rem; background:#fff;">
+                </div>
+                <div class="form-field">
+                  <label class="field-label" for="inputTglSurat" style="font-weight:700; color:#1E3A8A;">TANGGAL SURAT
+                    <span style="color:#DC2626;">*</span></label>
+                  <input type="date" id="inputTglSurat" class="form-control"
+                    style="font-size:0.92rem; background:#fff;">
+                </div>
+              </div>
+
+              <!-- Baris 2: Nomor Surat & Pengirim -->
+              <div class="form-row-2" style="margin-top:0.75rem;">
+                <div class="form-field">
+                  <label class="field-label" for="inputNoSuratPengirim" style="font-weight:700; color:#1E3A8A;">NO SURAT
+                    (Nomor dari Berkas Pengirim) <span style="color:#DC2626;">*</span></label>
+                  <input type="text" id="inputNoSuratPengirim" class="form-control"
+                    placeholder="Contoh: 005/PUPR-PEMDA/X/2026 atau Nomor Berkas Anda"
+                    style="font-size:0.92rem; background:#fff; font-family:monospace; font-weight:700;">
+                </div>
+                <div class="form-field">
+                  <label class="field-label" for="inputPengirimSuratSpesifik"
+                    style="font-weight:700; color:#1E3A8A;">PENGIRIM (Nama Instansi / Pejabat Pengirim) <span
+                      style="color:#DC2626;">*</span></label>
+                  <input type="text" id="inputPengirimSuratSpesifik" class="form-control"
+                    placeholder="Contoh: Kepala Dinas Bina Marga Prov / PT. Mitra"
+                    style="font-size:0.92rem; background:#fff;">
+                </div>
+              </div>
+
+              <!-- Baris 3: Perihal Surat -->
+              <div class="form-field" style="margin-top:0.75rem;">
+                <label class="field-label" for="inputPerihalSuratSpesifik"
+                  style="font-weight:700; color:#1E3A8A;">PERIHAL (Perihal Resmi Dokumen Surat) <span
+                    style="color:#DC2626;">*</span></label>
+                <input type="text" id="inputPerihalSuratSpesifik" class="form-control"
+                  placeholder="Contoh: Permohonan Bantuan Perbaikan Jembatan Gantung"
+                  style="font-size:0.92rem; background:#fff;">
+              </div>
+
+              <!-- Baris 4: Masuk Via & Kontak Pengirim -->
+              <div class="form-row-2" style="margin-top:0.75rem;">
+                <div class="form-field">
+                  <label class="field-label" for="inputMasukVia" style="font-weight:700; color:#1E3A8A;">MASUK VIA <span
+                      style="color:#DC2626;">*</span></label>
+                  <select id="inputMasukVia" class="form-control"
+                    style="font-size:0.92rem; background:#fff; font-weight:600;">
+                    <option value="Portal Online Buku Tamu PU">Portal Online Buku Tamu PU</option>
+                    <option value="Loket Pelayanan Terpadu Satu Pintu (PTSP)">Loket Pelayanan Terpadu Satu Pintu (PTSP)
+                    </option>
+                    <option value="Email Resmi / Persuratan Elektronik">Email Resmi / Persuratan Elektronik</option>
+                    <option value="Kurir / Pos / Ekspedisi Surat Fisik">Kurir / Pos / Ekspedisi Surat Fisik</option>
+                    <option value="Disposisi Langsung Pimpinan">Disposisi Langsung Pimpinan</option>
+                  </select>
+                </div>
+                <div class="form-field">
+                  <label class="field-label" for="inputKontakPengirimSurat"
+                    style="font-weight:700; color:#1E3A8A;">Kontak/Email Pengirim Surat <span
+                      style="color:#DC2626;">*</span></label>
+                  <input type="text" id="inputKontakPengirimSurat" class="form-control"
+                    placeholder="Contoh: 08123456789 / persuratan@instansi.go.id"
+                    style="font-size:0.92rem; background:#fff;">
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <button type="submit" id="btnSubmitLaporanTamu" class="btn-primary"
+            style="padding:1rem 2rem; font-size:1.05rem; width:100%; font-weight:800; background:linear-gradient(135deg, #0F294A 0%, #1E3A8A 100%); border:none; border-radius:10px; box-shadow:0 4px 14px rgba(15,41,74,0.3); cursor:pointer; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+            <span id="btnSubmitTeks">🚀 Kirim Berkas Surat &amp; Cetak Tanda Terima &rarr;</span>
+          </button>
+        </form>
+
+        <!-- Pop-Up Modal Konfirmasi: LAPORAN TERKIRIM + LEMBAR RESI SURAT MASUK TAMU -->
+        <div id="modalLaporanTerkirim"
+          style="display:none; position:fixed; inset:0; background:rgba(15,23,42,0.8); z-index:99999; backdrop-filter:blur(5px); align-items:center; justify-content:center; padding:1rem; overflow-y:auto;">
+          <div
+            style="background:#ffffff; border-radius:16px; max-width:680px; width:100%; box-shadow:0 25px 50px -12px rgba(0,0,0,0.45); overflow:hidden; border:2px solid #059669; margin:auto;">
+
+            <!-- Header Modal Pop-up -->
+            <div
+              style="background:linear-gradient(135deg, #059669 0%, #065F46 100%); color:#ffffff; padding:1.25rem 1.5rem; display:flex; align-items:center; justify-content:space-between;">
+              <div style="display:flex; align-items:center; gap:0.75rem;">
+                <div
+                  style="width:42px; height:42px; background:rgba(255,255,255,0.2); border:2px solid #fff; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:1.4rem;">
+                  ✓
+                </div>
+                <div>
+                  <h3 style="margin:0; font-size:1.3rem; font-weight:900; color:#fff; letter-spacing:0.5px;">LAPORAN
+                    BERHASIL TERKIRIM!</h3>
+                  <p style="margin:2px 0 0 0; font-size:0.8rem; color:#D1FAE5;">Tercatat Resmi di Buku Registrasi Masuk
+                    PU</p>
+                </div>
+              </div>
+              <button type="button" onclick="tutupModalLaporanTerkirim()"
+                style="background:transparent; border:none; color:#fff; font-size:1.5rem; cursor:pointer; line-height:1;">&times;</button>
+            </div>
+
+            <!-- Body Modal Pop-up -->
+            <div style="padding:1.5rem;">
+
+              <!-- Nomor Tiket Prominen -->
+              <div
+                style="background:#F0FDF4; border:2px dashed #059669; border-radius:10px; padding:1rem; text-align:center; margin-bottom:1.25rem;">
+                <div
+                  style="font-size:0.75rem; font-weight:800; color:#065F46; text-transform:uppercase; letter-spacing:1px; margin-bottom:0.25rem;">
+                  🎫 KODE TIKET REGISTRASI SURAT
+                </div>
+                <div id="popupModalNomorTiket"
+                  style="font-size:1.85rem; font-weight:900; color:#0F294A; font-family:monospace; letter-spacing:2px; user-select:all;">
+                  PUPR-LAP-0000
+                </div>
+                <button type="button" onclick="salinNomorTiketModal()"
+                  style="margin-top:0.4rem; background:#E2E8F0; border:none; padding:0.3rem 0.85rem; border-radius:6px; font-size:0.75rem; font-weight:700; color:#334155; cursor:pointer;">
+                  📋 Salin Nomor Tiket
+                </button>
+              </div>
+
+              <!-- TABEL RINCIAN SURAT MASUK (Sesuai Format Kolom Kedinasan Baru) -->
+              <div style="margin-bottom:1.25rem; border:1px solid #CBD5E1; border-radius:8px; overflow:hidden;">
+                <div
+                  style="background:#0F294A; color:#fff; padding:0.5rem 0.85rem; font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.5px;">
+                  📋 Lembar Tanda Terima Laporan Masuk
+                </div>
+                <table style="width:100%; border-collapse:collapse; font-size:0.82rem; text-align:left;">
+                  <tbody>
+                    <tr style="border-bottom:1px solid #E2E8F0; background:#F8FAFC;">
+                      <th style="padding:0.6rem 0.85rem; color:#475569; width:38%; font-weight:700;">TANGGAL DITERIMA
+                      </th>
+                      <td id="popResiTglDiterima" style="padding:0.6rem 0.85rem; font-weight:700; color:#0F294A;">-</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E2E8F0;">
+                      <th style="padding:0.6rem 0.85rem; color:#475569; font-weight:700;">TANGGAL SURAT</th>
+                      <td id="popResiTglSurat" style="padding:0.6rem 0.85rem; font-weight:600; color:#334155;">-</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E2E8F0; background:#F8FAFC;">
+                      <th style="padding:0.6rem 0.85rem; color:#475569; font-weight:700;">NO SURAT / TIKET</th>
+                      <td id="popResiNoSurat"
+                        style="padding:0.6rem 0.85rem; font-weight:800; color:#0F294A; font-family:monospace;">-</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E2E8F0;">
+                      <th style="padding:0.6rem 0.85rem; color:#475569; font-weight:700;">PENGIRIM</th>
+                      <td id="popResiPengirim" style="padding:0.6rem 0.85rem; font-weight:700; color:#0F294A;">-</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E2E8F0; background:#F8FAFC;">
+                      <th style="padding:0.6rem 0.85rem; color:#475569; font-weight:700;">PERIHAL</th>
+                      <td id="popResiPerihal" style="padding:0.6rem 0.85rem; font-weight:600; color:#1E293B;">-</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E2E8F0;">
+                      <th style="padding:0.6rem 0.85rem; color:#475569; font-weight:700;">MASUK VIA</th>
+                      <td id="popResiMasukVia" style="padding:0.6rem 0.85rem; font-weight:700; color:#0284C7;">Portal
+                        Online Buku Tamu PU</td>
+                    </tr>
+                    <tr style="background:#F8FAFC;">
+                      <th style="padding:0.6rem 0.85rem; color:#475569; font-weight:700;">KONTAK / EMAIL PENGIRIM</th>
+                      <td id="popResiKontak" style="padding:0.6rem 0.85rem; font-weight:600; color:#334155;">-</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Status ACC Awal (Merah: Belum di-ACC) -->
+              <div
+                style="background:#FEF2F2; border:2px solid #EF4444; border-radius:8px; padding:0.75rem 1rem; font-size:0.83rem; color:#991B1B; display:flex; align-items:center; gap:0.65rem; margin-bottom:1.25rem;">
+                <span style="font-size:1.25rem;">🔴</span>
+                <div>
+                  <strong>Status Notifikasi:</strong> <span style="background:#EF4444; color:#fff; font-weight:800; padding:2px 8px; border-radius:12px; font-size:0.75rem;">BELUM DI-ACC</span> &mdash; Surat/Laporan baru masuk, menunggu telaah dan persetujuan Super Admin PU.
+                </div>
+              </div>
+
+              <!-- Tombol Navigasi -->
+              <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+                <button type="button" onclick="kirimBuktiKeWhatsAppModal()"
+                  style="padding:0.8rem 1rem; font-size:0.85rem; font-weight:800; background:#25D366; color:#fff; border:none; border-radius:8px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; gap:0.4rem; box-shadow:0 3px 10px rgba(37,211,102,0.35);">
+                  <span>💬</span> Kirim Bukti Tiket ke WhatsApp PU
+                </button>
+                <button type="button" onclick="pantauDariModalPopup()"
+                  style="flex:1; min-width:180px; padding:0.8rem; font-size:0.9rem; font-weight:800; background:#7C3AED; color:#fff; border:none; border-radius:8px; cursor:pointer; box-shadow:0 3px 10px rgba(124,58,237,0.3);">
+                  🔍 Pantau Surat &amp; Status ACC
+                </button>
+                <button type="button" onclick="tutupModalLaporanTerkirim()"
+                  style="padding:0.8rem 1.25rem; font-size:0.85rem; font-weight:700; background:#F1F5F9; color:#475569; border:none; border-radius:8px; cursor:pointer;">
+                  Tutup
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Konfirmasi Tiket Laporan Tamu -->
+        <div id="konfirmasiTamu"
+          style="display:none; margin-top:1.5rem; background:#F0FDF4; border:2px solid #86EFAC; border-radius:8px; padding:1.25rem;">
+          <div
+            style="font-weight:800; color:#166534; font-size:1.15rem; margin-bottom:0.25rem; display:flex; align-items:center; gap:0.5rem;">
+            <span>✓</span> Laporan Anda Berhasil Terkirim ke Admin PU
+          </div>
+          <p style="font-size:0.85rem; color:#14532D; margin-bottom:0.75rem;">
+            Laporan Anda telah otomatis masuk ke dashboard <strong>Kotak Masuk Laporan Admin</strong>. Simpan nomor
+            tiket registrasi berikut untuk memantau surat balasan resmi dari Sakres:
+          </p>
+          <div
+            style="background:#fff; border:1px dashed #86EFAC; border-radius:6px; padding:0.85rem 1rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+            <div>
+              <div style="font-size:0.75rem; color:#64748B; font-weight:700; text-transform:uppercase;">Nomor Tiket
+                Registrasi:</div>
+              <strong id="tamuNoTiket" style="color:#0F294A; font-size:1.3rem; font-family:monospace;"></strong>
+            </div>
+            <div style="display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
+              <button type="button" class="btn-primary btn-sm" onclick="pantauSuratTamuOtomatis()"
+                style="background:#7C3AED; border-color:#7C3AED; font-weight:700; width:auto;">
+                🔍 Pantau Posisi &amp; Status Surat
+              </button>
+              <button type="button" class="btn-primary btn-sm" onclick="kirimBuktiKeWhatsAppModal()"
+                style="background:#25D366; border-color:#25D366; font-weight:700; width:auto; display:inline-flex; align-items:center; gap:0.35rem;">
+                <span>💬</span> Konfirmasi via WA
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- KONTEN 2: CEK SURAT BALASAN SAKRES SECARA MANDIRI VIA TIKET -->
+      <div id="contentCekSuratMandiri" class="public-form-card" style="display:none;">
+        <div class="public-form-intro">
+          <h3 style="color:#5B21B6; display:flex; align-items:center; gap:0.5rem;">
+            <span>📬</span> Cek Surat Balasan Resmi Sakres &amp; QR Barcode
+          </h3>
+          <p>Masukkan nomor tiket registrasi laporan Anda (Contoh: PUPR-LAP-1234 atau PUPR-PUB-1001) untuk melihat
+            posisi disposisi surat dan membaca Surat Balasan Resmi dari Sakres.</p>
+        </div>
+
+        <div style="display:flex; gap:0.5rem; margin-bottom:1.25rem;">
+          <input type="text" id="inputNomorTiketCari" class="form-control"
+            placeholder="Masukkan nomor tiket laporan (Contoh: PUPR-LAP-8821)..."
+            style="font-weight:700; font-family:monospace; font-size:1rem; border-color:#8B5CF6;">
+          <button type="button" class="btn-primary" onclick="cariSuratBalasanManual()"
+            style="width:auto; padding:0.65rem 1.5rem; font-weight:700; background:#7C3AED; border-color:#7C3AED;">
+            🔍 Periksa Surat
+          </button>
+        </div>
+
+        <div id="areaHasilCekSurat"></div>
+      </div>
+
+    </main>
+
+    <div class="toast-area" id="toastContainer" aria-live="polite"></div>
+
+    <footer class="pupr-footer"
+      style="background:#0F294A; color:#CBD5E1; text-align:center; padding:1.25rem; font-size:0.8rem; border-top:3px solid #FABE2C; margin-top:auto;">
+      PU (Pekerjaan Umum) Republik Indonesia &copy; 2026.
+    </footer>
+  </div>
+
+  <script src="app.js?v=5.0"></script>
+  <script>
+    let activeTicketSubmitted = '';
+    let lastSubmittedData = null;
+
+    window.kirimBuktiKeWhatsAppModal = function () {
+      if (!lastSubmittedData) return;
+      const d = lastSubmittedData;
+      const text = `*KONFIRMASI BUKTI LAPORAN TAMU - PU PEKERJAAN UMUM*\n` +
+        `-----------------------------------------\n` +
+        `*No. Tiket Registrasi:* ${d.ticket}\n` +
+        `*Nama Pelapor:* ${d.reporterName}\n` +
+        `*Instansi:* ${d.originAgency || '-'}\n` +
+        `*No. Handphone:* ${d.contact}\n` +
+        `*Layanan:* ${d.serviceType}\n` +
+        `*Perihal:* ${d.subject}\n` +
+        `*Lokasi:* ${d.location}\n` +
+        (d.hasOfficialLetter ? `*Surat Kedinasan:* Ada (No: ${d.letterData ? d.letterData.noSurat : '-'})\n` : `*Surat:* Laporan Langsung\n`) +
+        `*Tanggal Masuk:* ${d.date} WIB\n` +
+        `-----------------------------------------\n` +
+        `_Mohon izin mengonfirmasi berkas laporan pengaduan saya agar dapat ditindaklanjuti. Terima kasih._`;
+
+      const encoded = encodeURIComponent(text);
+      window.open(`https://wa.me/628111930158?text=${encoded}`, '_blank');
+    };
+
+    window.bagikanSuratBalasanKeWhatsApp = function (ticket) {
+      const reports = Storage.getPublicReports();
+      const match = reports.find(r => r.ticket === ticket);
+      if (!match || !match.replyLetter) return;
+      const reply = match.replyLetter;
+      const text = `*SURAT BALASAN RESMI - PU PEKERJAAN UMUM*\n` +
+        `-----------------------------------------\n` +
+        `*No. Tiket Laporan:* ${match.ticket}\n` +
+        `*Kepada Yth:* ${match.reporterName} (${match.originAgency || '-'})\n` +
+        `*Nomor Surat Dinas:* ${reply.letterNo}\n` +
+        `*Pejabat/Unit:* ${reply.officialName} (${reply.officialRole || 'PU'})\n` +
+        `*Perihal Balasan:* ${reply.subject}\n` +
+        `*Tanggal Terbit:* ${reply.date}\n` +
+        `*Status:* Resmi Diterbitkan & Terverifikasi Barcode PUSDATIN PU\n` +
+        `-----------------------------------------\n` +
+        `_Surat balasan resmi dari PU Pekerjaan Umum telah terbit dan dapat diunduh di portal tamu._`;
+
+      const encoded = encodeURIComponent(text);
+      window.open(`https://wa.me/?text=${encoded}`, '_blank');
+    };
+
+    window.toggleFormSuratTambahan = function (val) {
+      const section = document.getElementById('sectionFormInputSurat');
+      const btnTeks = document.getElementById('btnSubmitTeks');
+      if (val === 'AdaSurat') {
+        if (section) section.style.display = 'block';
+        if (btnTeks) btnTeks.innerHTML = '🚀 Kirim Berkas Surat &amp; Cetak Tanda Terima &rarr;';
+      } else {
+        if (section) section.style.display = 'none';
+        if (btnTeks) btnTeks.innerHTML = '🚀 Kirim Laporan Langsung ke Admin PU';
+      }
+    };
+
+    // Inisialisasi formulir bersih tanpa pra-isi otomatis
+    document.addEventListener('DOMContentLoaded', function () {
+      const section = document.getElementById('sectionFormInputSurat');
+      if (section) section.style.display = 'none';
+      const btnTeks = document.getElementById('btnSubmitTeks');
+      if (btnTeks) btnTeks.innerHTML = '🚀 Kirim Laporan / Pengaduan &rarr;';
+    });
+
+    window.switchPortalTamuTab = function (tab) {
+      const btnForm = document.getElementById('tabBtnKirimLaporan');
+      const btnCek = document.getElementById('tabBtnCekSurat');
+      const contentForm = document.getElementById('contentTamuForm');
+      const contentCek = document.getElementById('contentCekSuratMandiri');
+
+      if (tab === 'form') {
+        btnForm.classList.add('active');
+        btnCek.classList.remove('active');
+        contentForm.style.display = 'block';
+        contentCek.style.display = 'none';
+      } else {
+        btnCek.classList.add('active');
+        btnForm.classList.remove('active');
+        contentForm.style.display = 'none';
+        contentCek.style.display = 'block';
+      }
+    };
+
+    window.pantauSuratTamuOtomatis = function () {
+      if (!activeTicketSubmitted) return;
+      switchPortalTamuTab('cek');
+      document.getElementById('inputNomorTiketCari').value = activeTicketSubmitted;
+      cariSuratBalasanManual();
+    };
+
+    window.pantauDariModalPopup = function () {
+      tutupModalLaporanTerkirim();
+      pantauSuratTamuOtomatis();
+    };
+
+    window.tutupModalLaporanTerkirim = function () {
+      const modal = document.getElementById('modalLaporanTerkirim');
+      if (modal) modal.style.display = 'none';
+    };
+
+    window.salinNomorTiketModal = function () {
+      const ticketText = document.getElementById('popupModalNomorTiket').textContent.trim();
+      if (!ticketText) return;
+      navigator.clipboard.writeText(ticketText).then(() => {
+        alert('Nomor tiket berhasil disalin: ' + ticketText);
+      }).catch(() => {
+        alert('Nomor tiket: ' + ticketText);
+      });
+    };
+
+    window.cariSuratBalasanManual = function () {
+      const ticketInput = document.getElementById('inputNomorTiketCari');
+      const query = ticketInput ? ticketInput.value.trim().toUpperCase() : '';
+      const area = document.getElementById('areaHasilCekSurat');
+      if (!area) return;
+
+      if (!query) {
+        alert('Silakan masukkan nomor tiket laporan Anda.');
+        return;
+      }
+
+      const reports = Storage.getPublicReports();
+      const match = reports.find(r => r.ticket && r.ticket.toUpperCase() === query);
+
+      if (!match) {
+        area.innerHTML = `
+          <div style="background:#FEF2F2; border:1px solid #FCA5A5; border-radius:8px; padding:1.25rem; color:#991B1B;">
+            <strong>Nomor Tiket "${escapeHtml(query)}" Tidak Ditemukan</strong>
+            <p style="font-size:0.85rem; margin-top:0.35rem; color:#B91C1C;">
+              Pastikan Anda memasukkan kode tiket dengan benar (Contoh: PUPR-LAP-1234 atau PUPR-PUB-1001).
+            </p>
+          </div>
+        `;
+        return;
+      }
+
+      const isDisposisi = match.targetUnit && match.targetUnit !== 'Belum Didisposisi';
+      const hasReply = !!match.replyLetter;
+      const statusRaw = (match.status || '').toLowerCase();
+
+      // 3 Warna Status: Merah (Belum ACC), Kuning (Diproses), Hijau (Sudah ACC)
+      let statusCardColor = '#DC2626';
+      let statusCardBg = '#FEF2F2';
+      let statusBorder = '#EF4444';
+      let statusText = '#991B1B';
+      let statusTitle = '🔴 STATUS: BELUM DI-ACC';
+      let statusDesc = 'Surat baru diterima dan sedang menunggu telaah Super Admin';
+
+      if (statusRaw.includes('selesai') || statusRaw.includes('disetujui') || statusRaw.includes('acc') || hasReply) {
+        statusCardColor = '#16A34A';
+        statusCardBg = '#DCFCE7';
+        statusBorder = '#16A34A';
+        statusText = '#166534';
+        statusTitle = '🟢 STATUS: SUDAH DI-ACC (DISETUJUI)';
+        statusDesc = 'Laporan telah disetujui resmi oleh Super Admin PU';
+      } else if (statusRaw.includes('tindak') || statusRaw.includes('proses') || isDisposisi) {
+        statusCardColor = '#D97706';
+        statusCardBg = '#FEF3C7';
+        statusBorder = '#F59E0B';
+        statusText = '#92400E';
+        statusTitle = '🟡 STATUS: SEDANG DIPROSES';
+        statusDesc = 'Laporan sedang ditindaklanjuti oleh Bidang Teknis PUPR';
+      }
+
+      area.innerHTML = `
+        <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:1.5rem; margin-top:1rem; box-shadow:0 4px 15px rgba(0,0,0,0.05);">
+          
+          <!-- Header Ringkasan & Tiket -->
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem; margin-bottom:1.25rem; border-bottom:2px solid #E2E8F0; padding-bottom:1rem;">
+            <div>
+              <div style="font-size:0.75rem; color:#64748B; font-weight:800; text-transform:uppercase; letter-spacing:0.5px;">NOMOR TIKET LAPORAN:</div>
+              <div style="font-size:1.45rem; font-weight:900; color:#0F294A; font-family:monospace; letter-spacing:1px;">${escapeHtml(match.ticket)}</div>
+              <div style="font-size:0.8rem; color:#64748B; margin-top:2px;">Tanggal Lapor: ${escapeHtml(match.date || '-')}</div>
+            </div>
+            
+            <div style="display:flex; flex-direction:column; align-items:flex-end; gap:0.4rem;">
+              <!-- BADGE STATUS 3 WARNA RESMI -->
+              <div style="background:${statusCardBg}; border:2px solid ${statusBorder}; color:${statusText}; padding:0.45rem 1rem; border-radius:30px; font-weight:900; font-size:0.88rem; display:inline-flex; align-items:center; gap:0.4rem; box-shadow:0 2px 6px rgba(0,0,0,0.06);">
+                ${statusTitle}
+              </div>
+              <span style="font-size:0.75rem; color:#64748B; font-weight:700;">
+                Keterangan: ${statusDesc}
+              </span>
+            </div>
+          </div>
+
+          <!-- Rincian Pemohon & Perihal -->
+          <div style="background:#ffffff; border:1px solid #E2E8F0; border-radius:8px; padding:1rem; margin-bottom:1.5rem; display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:0.75rem;">
+            <div>
+              <div style="font-size:0.72rem; color:#64748B; font-weight:700;">NAMA PEMOHON / TAMU:</div>
+              <div style="font-weight:800; color:#0F294A; font-size:0.95rem;">${escapeHtml(match.reporterName)}</div>
+              <div style="font-size:0.8rem; color:#475569;">${escapeHtml(match.originAgency || '-')}</div>
+            </div>
+            <div>
+              <div style="font-size:0.72rem; color:#64748B; font-weight:700;">PERIHAL LAPORAN:</div>
+              <div style="font-weight:800; color:#0F294A; font-size:0.95rem;">${escapeHtml(match.subject)}</div>
+              <div style="font-size:0.8rem; color:#475569;">Lokasi: ${escapeHtml(match.location || '-')}</div>
+            </div>
+          </div>
+
+          <!-- Timeline Alur Perjalanan Surat: Sampai Mana Surat Berada Sesuai Struktural PUPR -->
+          <div style="margin-bottom:1.5rem;">
+            <div style="font-size:0.85rem; font-weight:800; color:#0F294A; margin-bottom:0.75rem; text-transform:uppercase; letter-spacing:0.5px; display:flex; align-items:center; gap:0.4rem;">
+              <span>🧭</span> ALUR STRUKTURAL PERJALANAN SURAT (SUPER ADMIN &rarr; BIDANG &rarr; SAKRES):
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
+              
+              <!-- Tahap 1: Laporan Masuk Langsung ke Super Admin -->
+              <div style="background:#fff; border:2px solid #059669; border-radius:8px; padding:0.9rem; position:relative; box-shadow:0 2px 5px rgba(0,0,0,0.03);">
+                <div style="display:flex; align-items:center; gap:0.4rem; color:#059669; font-weight:800; font-size:0.9rem; margin-bottom:0.35rem;">
+                  <span>✓</span> 1. Super Admin PU
+                </div>
+                <div style="font-size:0.78rem; color:#475569; line-height:1.4;">Laporan dari tamu masuk langsung ke meja Super Admin untuk verifikasi kelayakan &amp; arahan.</div>
+                <div style="margin-top:0.5rem; font-size:0.75rem; font-weight:800; color:#059669;">
+                  Posisi: Diterima Langsung oleh Super Admin
+                </div>
+              </div>
+
+              <!-- Tahap 2: Turun ke Bidang Teknis Melalui Disposisi Super Admin -->
+              <div style="background:#fff; border:2px solid ${isDisposisi ? '#059669' : '#CBD5E1'}; border-radius:8px; padding:0.9rem; position:relative; box-shadow:0 2px 5px rgba(0,0,0,0.03);">
+                <div style="display:flex; align-items:center; gap:0.4rem; color:${isDisposisi ? '#059669' : '#64748B'}; font-weight:800; font-size:0.9rem; margin-bottom:0.35rem;">
+                  <span>${isDisposisi ? '✓' : '⏳'}</span> 2. Turun ke Bidang Teknis
+                </div>
+                <div style="font-size:0.78rem; color:#475569; line-height:1.4;">
+                  Super Admin menurunkan disposisi penanganan ke: <strong style="color:#0F294A;">${escapeHtml(match.targetUnit)}</strong>
+                </div>
+                <div style="margin-top:0.5rem; font-size:0.75rem; font-weight:800; color:${isDisposisi ? '#059669' : '#D97706'};">
+                  ${isDisposisi ? 'Posisi: Sedang Ditindaklanjuti Bidang Teknis' : 'Posisi: Menunggu Disposisi dari Super Admin'}
+                </div>
+              </div>
+
+              <!-- Tahap 3: Diteruskan ke Sakres untuk Penyusunan Surat Balasan Resmi -->
+              <div style="background:#fff; border:2px solid ${hasReply ? '#7C3AED' : '#CBD5E1'}; border-radius:8px; padding:0.9rem; position:relative; box-shadow:0 2px 5px rgba(0,0,0,0.03);">
+                <div style="display:flex; align-items:center; gap:0.4rem; color:${hasReply ? '#7C3AED' : '#64748B'}; font-weight:800; font-size:0.9rem; margin-bottom:0.35rem;">
+                  <span>${hasReply ? '✓' : '⏳'}</span> 3. Sakres (Susunan Surat Resmi)
+                </div>
+                <div style="font-size:0.78rem; color:#475569; line-height:1.4;">
+                  Petugas Sakres menyusun naskah Surat Balasan Resmi Kementerian berbarcode QR PDF.
+                </div>
+                <div style="margin-top:0.5rem; font-size:0.75rem; font-weight:800; color:${hasReply ? '#7C3AED' : '#94A3B8'};">
+                  ${hasReply ? 'Posisi: Surat Resmi Sakres Selesai Diterbitkan' : (isDisposisi ? 'Posisi: Dalam Antrean Penyusunan Surat Sakres' : 'Posisi: Menunggu Proses Bidang Teknis Selesai')}
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- TAMPILAN DOKUMEN RESMI SURAT BALASAN SAKRES JIKA SUDAH ADA -->
+          ${hasReply ? `
+            <div style="background:#fff; border:2px solid #7C3AED; border-radius:10px; padding:1.5rem; font-family:'Times New Roman', serif; color:#000; box-shadow:0 4px 15px rgba(124,58,237,0.12);">
+              
+              <!-- Kop Surat Resmi PU -->
+              <div style="display:flex; align-items:center; gap:1rem; border-bottom:3px double #000; padding-bottom:0.75rem; margin-bottom:1.25rem;">
+                <img src="logo-pu.webp" alt="Logo PU" style="width:52px; height:52px; object-fit:contain; border-radius:4px;">
+                <div style="text-align:center; flex:1;">
+                  <div style="font-size:1.05rem; font-weight:900; text-transform:uppercase; letter-spacing:0.5px;">PU (PEKERJAAN UMUM) REPUBLIK INDONESIA</div>
+                  <div style="font-size:0.8rem; font-weight:700;">SEKRETARIAT JENDERAL &bull; BAGIAN SURAT BALASAN &amp; PELAYANAN (SAKRES)</div>
+                  <div style="font-size:0.68rem; font-family:sans-serif; color:#333; margin-top:2px;">Jl. Pattimura No. 20, Kebayoran Baru, Jakarta Selatan 12110 &bull; Telp. (021) 722844</div>
+                </div>
+              </div>
+
+              <!-- Metadata Surat -->
+              <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:1rem; font-family:sans-serif;">
+                <div>
+                  <div>Nomor Surat &nbsp;: <strong>${escapeHtml(match.replyLetter.letterNo)}</strong></div>
+                  <div>Sifat &nbsp; &nbsp; &nbsp; &nbsp; : Resmi / Penting</div>
+                  <div>Perihal &nbsp; &nbsp; &nbsp; : <strong>${escapeHtml(match.replyLetter.subject)}</strong></div>
+                </div>
+                <div style="text-align:right;">
+                  <div>Jakarta, ${escapeHtml(match.replyLetter.date.slice(0, 10))}</div>
+                  <div style="font-size:0.75rem; color:#6B21A8; font-weight:700; margin-top:0.25rem;">Tiket: ${escapeHtml(match.ticket)}</div>
+                </div>
+              </div>
+
+              <!-- Tujuan -->
+              <div style="margin-bottom:1.25rem; font-size:0.85rem; font-family:sans-serif;">
+                <div>Kepada Yth.</div>
+                <div style="font-weight:700;">${escapeHtml(match.reporterName)}</div>
+                <div>${escapeHtml(match.originAgency || 'Masyarakat / Tamu')}</div>
+                <div>Di Tempat</div>
+              </div>
+
+              <!-- Isi Surat / Lampiran File Surat Balasan -->
+              ${match.replyLetter.method === 'upload' && match.replyLetter.fileAttachment ? `
+                <div style="background:#F0F7FF; border:1px solid #BFDBFE; border-radius:8px; padding:1.25rem; margin-bottom:1.5rem; text-align:center; font-family:sans-serif;">
+                  <div style="font-size:1.6rem; margin-bottom:0.25rem;">📄</div>
+                  <div style="font-weight:700; font-size:1rem; color:#1E3A8A;">Berkas Surat Balasan Resmi Telah Diterbitkan</div>
+                  <div style="font-size:0.8rem; color:#475569; margin:0.25rem 0 0.85rem 0;">Nama Berkas: <strong>${escapeHtml(match.replyLetter.fileName || 'Dokumen_Surat_Balasan.pdf')}</strong></div>
+                  <a href="${match.replyLetter.fileAttachment}" download="${escapeHtml(match.replyLetter.fileName || 'Surat_Balasan_PU.pdf')}" 
+                    style="display:inline-flex; align-items:center; gap:0.4rem; background:#153E75; color:#fff; text-decoration:none; padding:0.6rem 1.4rem; border-radius:6px; font-weight:700; font-size:0.9rem; box-shadow:0 3px 8px rgba(21,62,117,0.25);">
+                    ⬇️ Unduh Berkas Surat Balasan Resmi
+                  </a>
+                </div>
+              ` : `
+                <div style="font-size:0.9rem; line-height:1.6; text-align:justify; margin-bottom:1.5rem; white-space:pre-line;">
+                  ${escapeHtml(match.replyLetter.content)}
+                </div>
+              `}
+
+              <!-- Footer Tanda Tangan & QR Barcode PDF Sah -->
+              <div style="display:flex; justify-content:space-between; align-items:flex-end; border-top:1px dashed #CBD5E1; padding-top:1rem; margin-top:1rem;">
+                <div style="text-align:center; font-family:sans-serif;">
+                  <div style="font-size:0.7rem; color:#64748B; font-weight:700; margin-bottom:4px;">BARCODE VERIFIKASI DOKUMEN</div>
+                  <img src="${match.replyLetter.barcodeUrl}" alt="QR Verifikasi" style="width:115px; height:115px; border:1px solid #CBD5E1; padding:3px; background:#fff; border-radius:6px; display:block; margin:0 auto;">
+                  <div style="font-size:0.65rem; color:#059669; font-weight:700; margin-top:3px;">✓ Dokumen Sah &amp; Terverifikasi</div>
+                </div>
+                <div style="text-align:center; font-family:sans-serif; min-width:200px;">
+                  <div style="font-size:0.78rem; font-weight:700; color:#333;">PU RI</div>
+                  <div style="font-size:0.72rem; color:#64748B; margin-bottom:2.5rem;">${escapeHtml(match.replyLetter.officialRole || 'Sakres PU')}</div>
+                  <div style="font-weight:800; font-size:0.85rem; border-bottom:1px solid #000; display:inline-block; padding-bottom:1px;">${escapeHtml(match.replyLetter.officialName)}</div>
+                  <div style="font-size:0.7rem; color:#475569;">NIP. 19850412 201001 2 008</div>
+                </div>
+              </div>
+
+              <div style="text-align:center; margin-top:1.5rem; display:flex; gap:0.6rem; justify-content:center; flex-wrap:wrap;">
+                <button type="button" class="btn-primary" onclick="window.print()" style="background:#0F294A; border:none; padding:0.65rem 1.25rem; font-size:0.85rem; font-weight:700; border-radius:6px;">
+                  🖨️ Cetak / Unduh Lembar Surat Balasan (PDF)
+                </button>
+                <button type="button" class="btn-primary" onclick="bagikanSuratBalasanKeWhatsApp('${escapeHtml(match.ticket)}')" style="background:#25D366; border:none; padding:0.65rem 1.25rem; font-size:0.85rem; font-weight:700; border-radius:6px; display:inline-flex; align-items:center; gap:0.4rem;">
+                  <span>💬</span> Bagikan / Konfirmasi Surat ke WhatsApp
+                </button>
+              </div>
+
+            </div>
+          ` : `
+            <div style="background:#FFFBEB; border:1px solid #FDE68A; border-radius:8px; padding:1rem; font-size:0.85rem; color:#92400E; display:flex; align-items:center; gap:0.65rem;">
+              <span style="font-size:1.3rem;">⏳</span>
+              <div>
+                <strong>Surat Sedang Dalam Proses Penanganan:</strong><br>
+                Laporan Anda saat ini sedang dalam penelaahan oleh unit kerja terkait (${escapeHtml(match.targetUnit)}). Petugas Sakres akan segera menerbitkan Surat Balasan Resmi yang dilengkapi Barcode PDF otentik di halaman ini.
+              </div>
+            </div>
+          `}
+
+        </div>
+      `;
+    };
+
+    document.getElementById('formBukuTamu').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const nama = document.getElementById('tamuNama').value.trim();
+      const hp = document.getElementById('tamuHp').value.trim();
+      const email = document.getElementById('tamuEmail').value.trim();
+      const genderEl = document.querySelector('input[name="tamuGender"]:checked');
+      if (!genderEl) {
+        showToast('Peringatan', 'Harap pilih Jenis Kelamin Anda.', 'error');
+        return;
+      }
+      const gender = genderEl.value;
+      const instansi = document.getElementById('tamuInstansi').value.trim();
+
+      const katEl = document.querySelector('input[name="tamuKategoriPemohon"]:checked');
+      if (!katEl) {
+        showToast('Peringatan', 'Harap pilih Kategori Pemohon Anda.', 'error');
+        return;
+      }
+      const kategori = katEl.value;
+
+      const keperluan = document.getElementById('tamuKeperluan').value.trim();
+      const lokasi = document.getElementById('tamuLokasi').value.trim();
+
+      const layEl = document.querySelector('input[name="tamuJenisLayananRadio"]:checked');
+      if (!layEl) {
+        showToast('Peringatan', 'Harap pilih Jenis Layanan Anda.', 'error');
+        return;
+      }
+      const jenisLayanan = layEl.value;
+
+      const rincian = document.getElementById('tamuRincian').value.trim();
+
+      const opsiKirimEl = document.querySelector('input[name="tamuOpsiKirimSurat"]:checked');
+      if (!opsiKirimEl) {
+        showToast('Peringatan', 'Harap tentukan apakah Anda menyertakan berkas/surat resmi.', 'error');
+        return;
+      }
+      const tipePengajuan = opsiKirimEl.value;
+      const adaSurat = (tipePengajuan === 'AdaSurat');
+
+      const ticket = 'PUPR-LAP-' + Math.floor(1000 + Math.random() * 9000);
+      activeTicketSubmitted = ticket;
+      const d = new Date();
+      const pad = (n) => String(n).padStart(2, '0');
+      const dateStr = `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+
+      // Ambil data spesifik surat jika ada
+      let letterData = null;
+      if (adaSurat) {
+        const tglTerimaInput = document.getElementById('inputTglDiterima').value || dateStr.slice(0, 10);
+        const tglSuratInput = document.getElementById('inputTglSurat').value || dateStr.slice(0, 10);
+        const noSuratInput = document.getElementById('inputNoSuratPengirim').value.trim() || ticket;
+        const pengirimInput = document.getElementById('inputPengirimSuratSpesifik').value.trim() || `${nama} (${instansi || 'Masyarakat/Umum'})`;
+        const perihalInput = document.getElementById('inputPerihalSuratSpesifik').value.trim() || keperluan;
+        const masukViaInput = document.getElementById('inputMasukVia').value;
+        const kontakInput = document.getElementById('inputKontakPengirimSurat').value.trim() || `${hp} / ${email}`;
+
+        letterData = {
+          tglDiterima: tglTerimaInput + ` (${pad(d.getHours())}:${pad(d.getMinutes())} WIB)`,
+          tglSurat: tglSuratInput,
+          noSurat: noSuratInput,
+          pengirim: pengirimInput,
+          perihal: perihalInput,
+          masukVia: masukViaInput,
+          kontak: kontakInput
+        };
+      }
+
+      const laporanTamu = {
+        ticket: ticket,
+        date: dateStr,
+        reporterName: nama,
+        contact: hp,
+        gender: gender,
+        email: email,
+        originAgency: instansi,
+        applicantCategory: kategori,
+        serviceType: jenisLayanan,
+        targetUnit: 'Belum Didisposisi',
+        unit: 'Belum Didisposisi',
+        subject: keperluan,
+        location: lokasi,
+        description: rincian ? (keperluan + '. Rincian: ' + rincian) : keperluan,
+        hasOfficialLetter: adaSurat,
+        letterData: letterData,
+        surveyConsent: true,
+        status: 'Menunggu Verifikasi Dinas',
+        replyLetter: null
+      };
+
+      lastSubmittedData = laporanTamu;
+
+      Storage.addPublicReport(laporanTamu);
+      Storage.addAuditLog('TAMU', nama, 'Pelapor Tamu', 'Kirim Laporan Pengaduan', keperluan + (adaSurat ? ' (Dengan Berkas Surat Masuk)' : ' (Laporan Langsung)'), '-');
+
+      // Tampilkan Nomor Tiket di Banner Inline
+      document.getElementById('tamuNoTiket').textContent = ticket;
+      document.getElementById('konfirmasiTamu').style.display = 'block';
+
+      if (adaSurat && letterData) {
+        // JIKA ADA SURAT: TAMPILKAN POP-UP LEMBAR RESI
+        document.getElementById('popupModalNomorTiket').textContent = ticket;
+        document.getElementById('popResiTglDiterima').textContent = letterData.tglDiterima;
+        document.getElementById('popResiTglSurat').textContent = letterData.tglSurat;
+        document.getElementById('popResiNoSurat').textContent = letterData.noSurat;
+        document.getElementById('popResiPengirim').textContent = letterData.pengirim;
+        document.getElementById('popResiPerihal').textContent = letterData.perihal;
+        document.getElementById('popResiMasukVia').textContent = letterData.masukVia;
+        document.getElementById('popResiKontak').textContent = letterData.kontak;
+
+        const popupModal = document.getElementById('modalLaporanTerkirim');
+        if (popupModal) popupModal.style.display = 'flex';
+        showToast('Surat Masuk Diterima', `Surat laporan berhasil dicatat di Registrasi PU dengan Nomor Tiket ${ticket}.`, 'success');
+      } else {
+        // JIKA TIDAK MAKE SURAT: LANGSUNG KIRIM LAPORAN KE ADMIN (TANPA POPUP SURAT, LANGSUNG NOTIF SUKSES)
+        showToast('Laporan Terkirim', `Laporan Anda berhasil langsung terkirim ke Admin PU dengan Nomor Tiket ${ticket}.`, 'success');
+      }
+
+      this.reset();
+      const sectionAfter = document.getElementById('sectionFormInputSurat');
+      if (sectionAfter) sectionAfter.style.display = 'none';
+      const btnTeksAfter = document.getElementById('btnSubmitTeks');
+      if (btnTeksAfter) btnTeksAfter.innerHTML = '🚀 Kirim Laporan / Pengaduan &rarr;';
+    });
+  </script>
+</body>
+
+</html>

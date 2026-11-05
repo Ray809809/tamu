@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Dialihkan ke Portal Tamu & Pelayanan Publik - Kementerian PUPR</title>
+  <script>
+    // Dialihkan otomatis ke portal tamu resmi PUPR
+    window.location.replace('tamu.html');
+  </script>
+  <link rel="stylesheet" href="style.css?v=5.0">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%230F294A%22 rx=%2210%22/><text y=%2268%22 x=%2250%22 text-anchor=%22middle%22 font-size=%2250%22 font-weight=%22bold%22 fill=%22%23FABE2C%22>PU</text></svg>">
+</head>
+
+<body>
+  <div class="app-wrapper">
+    <!-- Header Resmi Khusus Laporan Warga -->
+    <header class="pupr-topbar">
+      <div style="display:flex; align-items:center; gap:0.75rem;">
+        <div class="pupr-logo-box">PU</div>
+        <div class="pupr-brand-text">
+          <span class="pupr-brand-title">KEMENTERIAN PUPR</span>
+          <span class="pupr-brand-sub">Portal Aspirasi & Laporan Infrastruktur Warga</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-wrapper" style="max-width: 960px; margin: 1.5rem auto; width: 100%;">
+
+      <div class="public-hero-card">
+        <div class="public-hero-text">
+          <span class="badge-role badge-role-pic" style="background:#0284C7; color:#fff;">Layanan Warga
+            Masyarakat</span>
+          <h1>Layanan Aduan & Aspirasi Infrastruktur</h1>
+          <p>Masyarakat dapat menyampaikan laporan kerusakan jalan, jembatan berlubang, banjir, saluran air/irigasi, dan
+            permohonan data publik secara cepat dan transparan ke Kementerian PUPR.</p>
+        </div>
+        <div class="public-hero-stats">
+          <div class="public-stat-item">
+            <span class="public-stat-val" id="publicReportTotalCount">0</span>
+            <span class="public-stat-label">Laporan Masuk</span>
+          </div>
+          <div class="public-stat-item">
+            <span class="public-stat-val" style="color:#059669;">Resmi</span>
+            <span class="public-stat-label">Terverifikasi PUPR</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Warga: 1. Formulir | 2. Lacak Tiket | 3. Daftar Laporan -->
+      <div class="public-tabs-nav">
+        <button type="button" class="public-tab-btn active" id="tabPublicCreate">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;">
+            <path d="M12 20h9"></path>
+            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+          </svg>
+          <span>Formulir Pengaduan Baru</span>
+        </button>
+        <button type="button" class="public-tab-btn" id="tabPublicTrack">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <span>Lacak Status Tiket</span>
+        </button>
+        <button type="button" class="public-tab-btn" id="tabPublicList">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <span>Daftar Laporan Terkini</span>
+        </button>
+      </div>
+
+      <!-- TAB 1: FORMULIR PENGADUAN -->
+      <div class="public-tab-content active" id="publicCreateContent">
+        <div class="public-form-card">
+          <div class="public-form-intro">
+            <h3>Formulir Pelaporan Warga</h3>
+            <p>Laporkan kendala fasilitas umum agar segera diverifikasi dan ditangani oleh unit kerja dinas terkait.</p>
+          </div>
+
+          <form id="publicReportForm">
+            <div class="form-row-2">
+              <div class="form-field">
+                <label class="field-label" for="reportReporterName">Nama Lengkap Warga <span
+                    style="color:#DC2626;">*</span></label>
+                <input type="text" id="reportReporterName" class="form-control" placeholder="Contoh: Budi Santoso"
+                  required>
+              </div>
+              <div class="form-field">
+                <label class="field-label" for="reportContact">No. Handphone / WhatsApp <span
+                    style="color:#DC2626;">*</span></label>
+                <input type="tel" id="reportContact" class="form-control" placeholder="Contoh: 081234567890" required>
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-field">
+                <label class="field-label" for="reportGender">Jenis Kelamin <span
+                    style="color:#DC2626;">*</span></label>
+                <select id="reportGender" class="form-control" required>
+                  <option value="">-- Pilih Jenis Kelamin --</option>
+                  <option value="Laki-laki">Laki-laki</option>
+                  <option value="Perempuan">Perempuan</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label class="field-label" for="reportEmail">Alamat Email <span style="color:#DC2626;">*</span></label>
+                <input type="email" id="reportEmail" class="form-control" placeholder="email@domain.com" required>
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-field">
+                <label class="field-label" for="reportOriginAgency">Wilayah Asal Domisili / Lembaga <span
+                    style="color:#DC2626;">*</span></label>
+                <input type="text" id="reportOriginAgency" class="form-control"
+                  placeholder="Contoh: Warga RT 04 Kab. Karawang" required>
+              </div>
+              <div class="form-field">
+                <label class="field-label" for="reportApplicantCategory">Kategori Laporan <span
+                    style="color:#DC2626;">*</span></label>
+                <select id="reportApplicantCategory" class="form-control" required>
+                  <option value="Masyarakat Umum">Masyarakat Umum</option>
+                  <option value="Komunitas / Ormas">Komunitas Warga</option>
+                  <option value="Pelaku Usaha Daerah">Pelaku Usaha / Pedagang</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label class="field-label" for="reportServiceType">Jenis Aduan Infrastruktur <span
+                  style="color:#DC2626;">*</span></label>
+              <select id="reportServiceType" class="form-control" required>
+                <option value="Layanan Pengaduan">Kerusakan Jalan Nasional & Jembatan</option>
+                <option value="Layanan Penanggulangan Banjir dan Bencana">Saluran Irigasi, Sungai, Tanggul, & Banjir
+                </option>
+                <option value="Layanan Umum dan Lainnya">Drainase, Air Minum, Permukiman</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label class="field-label" for="reportSubject">Perihal Singkat Laporan <span
+                  style="color:#DC2626;">*</span></label>
+              <input type="text" id="reportSubject" class="form-control"
+                placeholder="Contoh: Aspal Jalan Rusak dan Berlubang Parah" required>
+            </div>
+
+            <div class="form-field">
+              <label class="field-label" for="reportLocation">Lokasi Obyek Infrastruktur <span
+                  style="color:#DC2626;">*</span></label>
+              <input type="text" id="reportLocation" class="form-control"
+                placeholder="Contoh: Jalan Raya Pantura KM 42, Karawang Barat" required>
+            </div>
+
+            <div class="form-field">
+              <label class="field-label" for="reportDescription">Rincian Lengkap Kondisi di Lapangan <span
+                  style="color:#DC2626;">*</span></label>
+              <textarea id="reportDescription" class="form-control" rows="4"
+                placeholder="Jelaskan secara detail kerusakan yang terjadi..." required></textarea>
+            </div>
+
+            <div
+              style="background:#F0FDF4; border:1px solid #86EFAC; border-radius:var(--radius-sm); padding:0.85rem 1rem; margin-top:1rem;">
+              <label style="display:flex; align-items:flex-start; gap:0.65rem; cursor:pointer;">
+                <input type="checkbox" id="reportSurveyConsent"
+                  style="margin-top:0.2rem; width:16px; height:16px; accent-color:#059669;" checked>
+                <div style="font-size:0.82rem; color:#14532D; line-height:1.4;">
+                  <strong>Persetujuan Konfirmasi:</strong> Bersedia jika dihubungi petugas lapangan dinas PUPR untuk
+                  tindak lanjut perbaikan.
+                </div>
+              </label>
+            </div>
+
+            <div style="display:flex; justify-content:flex-end; gap:0.75rem; margin-top:1.5rem;">
+              <button type="submit" class="btn-primary" style="padding:0.75rem 2rem; font-size:0.95rem;">
+                🚀 Kirim Laporan Pengaduan
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- TAB 2: LACAK TIKET -->
+      <div class="public-tab-content" id="publicTrackContent">
+        <div class="public-form-card">
+          <div class="public-form-intro">
+            <h3>Lacak Status Tindak Lanjut Pengaduan</h3>
+            <p>Masukkan Nomor Tiket laporan yang Anda dapatkan saat pengiriman laporan.</p>
+          </div>
+          <div style="display:flex; gap:0.5rem; margin-bottom:1.5rem; max-width:550px;">
+            <input type="text" id="trackTicketInput" class="form-control" placeholder="Contoh: PUPR-PUB-1024">
+            <button type="button" class="btn-primary" id="btnTrackTicket"
+              style="white-space:nowrap; padding:0.6rem 1.25rem;">
+              🔍 Cari Tiket
+            </button>
+          </div>
+          <div id="trackResultArea"></div>
+        </div>
+      </div>
+
+      <!-- TAB 3: DAFTAR LAPORAN TERKINI -->
+      <div class="public-tab-content" id="publicListContent">
+        <div class="public-form-card">
+          <div class="public-form-intro">
+            <h3>Daftar Laporan Terkini Masuk</h3>
+            <p>Pantau transparansi tindak lanjut permohonan layanan yang telah masuk ke dinas PUPR.</p>
+          </div>
+          <div class="table-wrapper" style="margin-top:1rem;">
+            <table class="data-table" id="publicReportTable">
+              <thead>
+                <tr>
+                  <th>No. Tiket</th>
+                  <th>Tanggal</th>
+                  <th>Nama Warga</th>
+                  <th>Jenis Aduan</th>
+                  <th>Perihal</th>
+                  <th>Disposisi Unit</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="publicReportTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <div class="toast-area" id="toastContainer" aria-live="polite"></div>
+
+    <footer class="pupr-footer"
+      style="background:#0F294A; color:#CBD5E1; text-align:center; padding:1.25rem; font-size:0.8rem; border-top:3px solid #FABE2C;">
+      Kementerian Pekerjaan Umum dan Perumahan Rakyat Republik Indonesia &copy; 2026.
+    </footer>
+  </div>
+
+  <script src="app.js?v=5.0"></script>
+</body>
+
+</html>
